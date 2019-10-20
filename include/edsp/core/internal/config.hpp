@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: config.hpp
@@ -89,14 +89,6 @@
 #    define E_STANDARD_17
 #else
 #    error "eDSP does not support this standard"
-#endif
-
-#ifdef __cplusplus
-#    define EXTERN_C_START extern "C" {
-#    define EXTERN_C_END }
-#else
-#    define EXTERN_C_START
-#    define EXTERN_C_END
 #endif
 
 #if defined(__clang__) || defined(__GNUC__)

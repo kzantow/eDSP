@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: biquad_cascade.hpp
@@ -151,7 +151,6 @@ namespace edsp { namespace filter {
          * @param first Input iterator defining the beginning of the input range.
          * @param last Input iterator defining the ending of the input range.
          * @param d_first Output iterator defining the beginning of the destination range.
-         * @return
          */
         template <typename InputIt, typename OutputIt>
         constexpr void filter(InputIt first, InputIt last, OutputIt d_first);

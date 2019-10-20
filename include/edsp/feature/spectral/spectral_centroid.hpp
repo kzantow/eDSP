@@ -27,7 +27,7 @@
 #ifndef EDSP_SPECTRAL_CENTROID_HPP
 #define EDSP_SPECTRAL_CENTROID_HPP
 
-#include <edsp/statistics/centroid.hpp>
+#include <edsp/feature/statistics/centroid.hpp>
 
 namespace edsp { namespace feature { inline namespace spectral {
 
@@ -48,7 +48,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_centroid(ForwardIt first, ForwardIt last, ForwardIt first2) {
-        return statistics::centroid(first, last, first2);
+        return statistics::weighted_centroid(first, last, first2);
     }
 
 }}} // namespace edsp::feature::spectral

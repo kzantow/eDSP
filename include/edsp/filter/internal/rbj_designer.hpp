@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: biquad_designer.hpp
@@ -91,7 +91,6 @@ namespace edsp { namespace filter {
             return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
-
 
     template <typename T>
     struct RBJFilterDesigner<T, filter_type::AllPass> {

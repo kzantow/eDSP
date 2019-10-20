@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: fft_impl.hpp
@@ -29,7 +29,7 @@
 #    include <edsp/spectral/internal/libpffft_impl.hpp>
 #endif
 
-namespace edsp { inline namespace spectral {
+namespace edsp { inline namespace spectral { namespace internal {
 
 #if defined(USE_LIBFFTW)
     template <typename T>
@@ -43,6 +43,6 @@ namespace edsp { inline namespace spectral {
 #    error "Library not found"
 #endif
 
-}} // namespace edsp::spectral
+}}} // namespace edsp::spectral::internal
 
 #endif //EDSP_FFT_IMPL_HPP

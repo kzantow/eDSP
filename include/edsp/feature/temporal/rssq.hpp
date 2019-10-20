@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: rms.hpp
@@ -22,8 +22,6 @@
 #ifndef EDSP_RSSQ_HPP
 #define EDSP_RSSQ_HPP
 
-#include <edsp/meta/iterator.hpp>
-#include <edsp/feature/temporal/rms.hpp>
 #include <numeric>
 #include <cmath>
 
@@ -41,9 +39,9 @@ namespace edsp { namespace feature { inline namespace temporal {
      * @returns The root-sum-of-squares value of the input range.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> rssq(ForwardIt first, ForwardIt last) {
-        using input_t         = meta::value_type_t<ForwardIt>;
-        const auto sum_square = std::inner_product(first, last, first, static_cast<input_t>(1));
+    constexpr auto rssq(ForwardIt first, ForwardIt last) {
+        using value_type      = typename std::iterator_traits<ForwardIt>::value_type;
+        const auto sum_square = std::inner_product(first, last, first, static_cast<value_type>(0));
         return std::sqrt(sum_square);
     }
 

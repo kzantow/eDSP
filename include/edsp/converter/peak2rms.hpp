@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: peak2rms.hpp
@@ -42,10 +42,10 @@ namespace edsp { inline namespace converter {
      * @returns Peak-magnitude-to-RMS ratio.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> peak2rms(ForwardIt first, ForwardIt last) {
+    constexpr auto peak2rms(ForwardIt first, ForwardIt last) {
         const auto pair    = std::minmax_element(first, last);
-        const auto max_abs = std::max(std::abs(pair.first), std::abs(pair.second));
-        return max_abs / statistics::rms(first, last);
+        const auto max_abs = std::max(std::abs(*pair.first), std::abs(*pair.second));
+        return max_abs / feature::temporal::rms(first, last);
     }
 }} // namespace edsp::converter
 

@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: filter.hpp
@@ -110,7 +110,7 @@ namespace edsp { namespace filter {
     template <typename T, std::size_t MaxOrder>
     struct designer<T, designer_type::Butterworth, MaxOrder> {
         template <filter_type Type, typename... Args>
-        constexpr auto design( Args... arg) const -> decltype(butterworth_designer<T, Type, MaxOrder>{}(arg...)) {
+        constexpr auto design(Args... arg) const -> decltype(butterworth_designer<T, Type, MaxOrder>{}(arg...)) {
             return butterworth_designer<T, Type, MaxOrder>{}.operator()(arg...);
         }
     };
@@ -153,8 +153,7 @@ namespace edsp { namespace filter {
     template <typename T, designer_type Designer, filter_type Type, std::size_t MaxOrder, typename... Args>
     constexpr auto make_filter(Args... arg)
         -> decltype(designer<T, Designer, MaxOrder>{}.template design<Type>(std::declval<Args&&>()...)) {
-        const auto creator = designer<T, Designer, MaxOrder>{};
-        return creator.template design<Type>(arg...);
+        return designer<T, Designer, MaxOrder>{}.template design<Type>(arg...);
     }
 
     /**
@@ -162,9 +161,10 @@ namespace edsp { namespace filter {
      * @param b_first Beginning of the range elements representing the FIR/MA filter coefficients.
      * @param b_last End of the range elements representing the FIR/MA filter coefficients.
      * @param a_first Beginning of the range elements representing the IIR/AR filter coefficients.
-     * @param a_last End of the range elements representing the IIR/AR filter coefficients.
+     * @param a_last End of the range elements re
+     * presenting the IIR/AR filter coefficients.
      * @param d_first Output iterator defining the beginning of the destination range.
-     * @param N Number of evaluation points.
+     * @param K Number of evaluation points.
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr void freq(InputIt b_first, InputIt b_last, InputIt a_first, InputIt a_last, OutputIt d_first, Numeric K) {

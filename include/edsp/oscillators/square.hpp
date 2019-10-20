@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: square.hpp
@@ -23,7 +23,8 @@
 #define EDSP_OSCILLATOR_SQUARE_HPP
 
 #include <edsp/oscillators/sinusoidal.hpp>
-#include <edsp/math/constant.hpp>
+#include <edsp/meta/expects.hpp>
+#include <cmath>
 
 namespace edsp { namespace oscillators {
 
@@ -54,11 +55,11 @@ namespace edsp { namespace oscillators {
          * @brief Creates a square oscillator that generates a waveform with the configuration.
          *
          * @param amplitude Amplitude of the waveform.
-         * @param samplerate The sampling frequency in Hz.
+         * @param sample_rate The sampling frequency in Hz.
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          * @param duty Duty factor, numeric value from [0,1]
          */
-        constexpr square_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
+        constexpr square_oscillator(value_type amplitude, value_type sample_rate, value_type frequency,
                                     value_type duty) noexcept;
 
         /**
@@ -88,28 +89,28 @@ namespace edsp { namespace oscillators {
     };
 
     template <typename T>
-    constexpr square_oscillator<T>::square_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                                      value_type duty) noexcept :
-        oscillator<T>(amplitude, samplerate, frequency, 0),
-        duty_(duty) {}
+    constexpr square_oscillator<T>::square_oscillator(value_type amplitude, value_type sample_rate,
+                                                      value_type frequency, value_type duty) noexcept :
+        oscillator<T>(amplitude, sample_rate, frequency, 0) {
+        set_duty(duty);
+    }
 
     template <typename T>
     constexpr void square_oscillator<T>::set_duty(value_type duty) noexcept {
-        duty_ = duty / oscillator<T>::frequency();
+        meta::expects(duty >= 0 && duty <= 1, "duty must be a real number between 0 and 1.");
+        duty_ = duty * oscillator<T>::inverse_frequency_;
     }
 
     template <typename T>
     constexpr typename square_oscillator<T>::value_type square_oscillator<T>::duty() const noexcept {
-        return duty_ * oscillator<T>::frequency();
+        return duty_ * oscillator<T>::frequency_;
     }
 
     template <typename T>
     constexpr typename square_oscillator<T>::value_type square_oscillator<T>::operator()() {
-        const auto t               = oscillator<T>::timestamp();
-        const value_type result    = (t >= duty_) ? -1 : 1;
-        const value_type increased = t + oscillator<T>::sampling_period();
-        this->set_timestamp((increased > math::inv(oscillator<T>::frequency())) ? 0 : increased);
-        return result * oscillator<T>::amplitude();
+        const auto current_t = std::fmod(oscillator<T>::timestamp_, oscillator<T>::inverse_frequency_);
+        oscillator<T>::set_timestamp(oscillator<T>::timestamp_ + oscillator<T>::sampling_period_);
+        return (current_t >= duty_ ? 1 : -1) * oscillator<T>::amplitude_;
     }
 
 }} // namespace edsp::oscillators

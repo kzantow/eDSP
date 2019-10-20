@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: flux.hpp
@@ -24,9 +24,10 @@
 #define EDSP_FLUX_HPP
 
 #include <edsp/math/numeric.hpp>
+#include <edsp/meta/advance.hpp>
 #include <edsp/meta/iterator.hpp>
 
-namespace edsp { namespace feature { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
      * @brief Computes the flux between the elements in the range [first1, last1) and the
@@ -41,16 +42,19 @@ namespace edsp { namespace feature { namespace statistics {
      * @param first2 Input iterator defining the beginning of the second input range.
      * @return The estimated flux.
      * @see distances, distance
+     * @cite Introduction to AUDIO ANALYSIS, THEODOROS GI,ANNAKOPOULOS AGGELOS PIKRAKIS
      */
     template <distances d, typename InputIt>
     constexpr meta::value_type_t<InputIt> flux(InputIt first1, InputIt last1, InputIt first2) {
-        using value_type = meta::value_type_t<InputIt>;
-        const auto size  = std::distance(first1, last1);
-        auto accumulated = static_cast<value_type>(0);
+        using value_type        = meta::value_type_t<InputIt>;
+        const auto size         = std::distance(first1, last1);
+        const auto current_sum  = std::accumulate(first1, last1, static_cast<value_type>(0));
+        const auto previous_sum = std::accumulate(first1, meta::advance(first2, size), static_cast<value_type>(0));
+        auto accumulated        = static_cast<value_type>(0);
         for (; first1 != last1; ++first1, ++first2) {
-            accumulated += distance<d>(*first1, *first2);
+            accumulated += distance<d>(*first1 / current_sum, *first2 / previous_sum);
         }
-        return accumulated / static_cast<value_type>(size);
+        return accumulated;
     }
 
 }}} // namespace edsp::feature::statistics

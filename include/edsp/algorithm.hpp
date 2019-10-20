@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
 
  * File: algorithm.hpp
@@ -24,12 +24,15 @@
 
 #include <edsp/algorithm/amplifier.hpp>
 #include <edsp/algorithm/binary_search.hpp>
+#include <edsp/algorithm/linear_search.hpp>
+#include <edsp/algorithm/rectify.hpp>
 #include <edsp/algorithm/ceil.hpp>
 #include <edsp/algorithm/clipper.hpp>
 #include <edsp/algorithm/concatenate.hpp>
 #include <edsp/algorithm/equal.hpp>
 #include <edsp/algorithm/fix.hpp>
 #include <edsp/algorithm/floor.hpp>
+#include <edsp/algorithm/indexof.hpp>
 #include <edsp/algorithm/linspace.hpp>
 #include <edsp/algorithm/linspace.hpp>
 #include <edsp/algorithm/logspace.hpp>

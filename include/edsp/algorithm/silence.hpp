@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: silence.hpp
@@ -38,7 +38,7 @@ namespace edsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr bool silence(InputIt first, InputIt last, Numeric threshold) {
-        return statistics::power(first, last) < threshold;
+        return feature::temporal::power(first, last) < threshold;
     }
 
 }} // namespace edsp::algorithm

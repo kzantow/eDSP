@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: linear_search.hpp
@@ -35,21 +35,10 @@ namespace edsp { inline namespace algorithm {
      * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
      */
     template <typename ForwardIt>
-    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const meta::value_type_t<ForwardIt>& value) {
+    constexpr ForwardIt linear_search(ForwardIt first, ForwardIt last, const meta::value_type_t<ForwardIt>& value) {
         return std::find(first, last, value);
     }
 
-    /**
-     * @brief Searches for an element for which predicate p returns true in the range [first, last).
-     * @param first Forward iterator defining the begin of the range to examine.
-     * @param last Forward iterator defining the end of the range to examine.
-     * @param p Binary predicate which returns ​true for the required element. .
-     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
-     */
-    template <typename ForwardIt, class UnaryPredicate>
-    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, UnaryPredicate p) {
-        return std::find(first, last, p);
-    }
 }} // namespace edsp::algorithm
 
 #endif // EDSP_LINEAR_SEARCH_HPP

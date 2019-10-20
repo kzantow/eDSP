@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: sawtooth.hpp
@@ -24,6 +24,7 @@
 
 #include <edsp/oscillators/sinusoidal.hpp>
 #include <edsp/math/constant.hpp>
+#include <edsp/meta/expects.hpp>
 
 namespace edsp { namespace oscillators {
 
@@ -46,11 +47,11 @@ namespace edsp { namespace oscillators {
          * @brief Creates a sawtooth oscillator that generates a waveform with the configuration.
          *
          * @param amplitude Amplitude of the waveform.
-         * @param samplerate The sampling frequency in Hz.
+         * @param sample_rate The sampling frequency in Hz.
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          * @param width Width factor, numeric value from [0,1]
          */
-        constexpr sawtooth_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
+        constexpr sawtooth_oscillator(value_type amplitude, value_type sample_rate, value_type frequency,
                                       value_type width) noexcept;
         /**
          * @brief Generates one step.
@@ -79,28 +80,33 @@ namespace edsp { namespace oscillators {
     };
 
     template <typename T>
-    constexpr sawtooth_oscillator<T>::sawtooth_oscillator(value_type amplitude, value_type samplerate,
+    constexpr sawtooth_oscillator<T>::sawtooth_oscillator(value_type amplitude, value_type sample_rate,
                                                           value_type frequency, value_type width) noexcept :
-        oscillator<T>(amplitude, samplerate, frequency, 0),
-        width_(width) {}
+        oscillator<T>(amplitude, sample_rate, frequency, 0) {
+        set_width(width);
+    }
 
     template <typename T>
     constexpr void sawtooth_oscillator<T>::set_width(value_type width) noexcept {
-        width_ = width / oscillator<T>::frequency();
+        meta::expects(width >= 0 && width <= 1, "width must be a real number between 0 and 1.");
+        width_ = width;
     }
 
     template <typename T>
     constexpr typename sawtooth_oscillator<T>::value_type sawtooth_oscillator<T>::width() const noexcept {
-        return width_ * oscillator<T>::frequency();
+        return width_;
     }
 
     template <typename T>
     constexpr typename sawtooth_oscillator<T>::value_type sawtooth_oscillator<T>::operator()() {
-        const auto t               = oscillator<T>::timestamp();
-        const value_type result    = (t >= width_) ? -2 * t / (1 - width_) + 1 : 2 * t / width_ - 1;
-        const value_type increased = t + oscillator<T>::sampling_period();
-        this->set_timestamp((increased > 1. / oscillator<T>::frequency()) ? 0 : increased);
-        return result * oscillator<T>::amplitude();
+        const auto t = std::fmod(oscillator<T>::frequency_ * oscillator<T>::timestamp_, 1);
+        oscillator<T>::set_timestamp(oscillator<T>::timestamp_ + oscillator<T>::sampling_period_);
+        if (width_ != 0 and t < width_) {
+            return oscillator<T>::amplitude_ * (2 * t / width_ - 1);
+        } else if (width_ != 1 and t >= width_) {
+            return oscillator<T>::amplitude_ * (-2 * (t - width_) / (1 - width_) + 1);
+        }
+        return 0;
     }
 
 }} // namespace edsp::oscillators

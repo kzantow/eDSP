@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: index_of.hpp
@@ -35,8 +35,8 @@ namespace edsp { inline namespace algorithm {
      * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
      */
     template <typename ForwardIt>
-    constexpr std::int32_t indexof(ForwardIt first, ForwardIt last,
-                                   const typename std::iterator_traits<ForwardIt>::value_type& value) {
+    constexpr std::int32_t index_of(ForwardIt first, ForwardIt last,
+                                    const typename std::iterator_traits<ForwardIt>::value_type& value) {
         const auto element = std::find(first, last, value);
         return static_cast<int32_t>((element != last) ? std::distance(first, element) : -1);
     }

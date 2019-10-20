@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: butterworth.hpp
@@ -41,8 +41,8 @@ namespace edsp { namespace filter {
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles) const {
                 meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
-                analog.setNormalW(0);
-                analog.setNormalGain(1);
+                analog.set_w(0);
+                analog.set_gain(1);
                 analog.reset();
 
                 const auto size  = static_cast<T>(num_poles * 2);
@@ -64,8 +64,8 @@ namespace edsp { namespace filter {
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T gain_db) const {
                 meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
-                analog.setNormalW(constants<T>::pi);
-                analog.setNormalGain(1);
+                analog.set_w(constants<T>::pi);
+                analog.set_gain(1);
                 analog.reset();
 
                 const auto size  = static_cast<T>(num_poles * 2);
@@ -74,7 +74,7 @@ namespace edsp { namespace filter {
                 const auto gz    = -g;
                 const auto pairs = num_poles / 2;
                 for (auto i = 1ul; i <= pairs; ++i) {
-                    const auto theta = constants<T>::pi * (0.5 - (2 * i - 1) / size);
+                    const auto theta = static_cast<T>(constants<T>::pi * (0.5 - (2 * i - 1) / size));
                     analog.insert_conjugate(std::polar(gp, theta), std::polar(gz, theta));
                 }
 
@@ -156,8 +156,8 @@ namespace edsp { namespace filter {
                 BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
 
                 // HACK!
-                this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
-                this->digital_.setNormalGain(1);
+                this->digital_.set_w(normalized_center < 0.25 ? constants<T>::pi : 0);
+                this->digital_.set_gain(1);
             }
         };
 

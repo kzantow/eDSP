@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: triangular.hpp
@@ -22,7 +22,7 @@
 #ifndef EDSP_OSCILLATOR_TRIANGLE_HPP
 #define EDSP_OSCILLATOR_TRIANGLE_HPP
 
-#include <edsp/oscillators/sinusoidal.hpp>
+#include <edsp/oscillators/sawtooth.hpp>
 #include <edsp/math/constant.hpp>
 
 namespace edsp { namespace oscillators {
@@ -46,16 +46,16 @@ namespace edsp { namespace oscillators {
          * @brief Creates a sawtooth oscillator that generates a waveform with the configuration.
          *
          * @param amplitude Amplitude of the waveform.
-         * @param samplerate The sampling frequency in Hz.
+         * @param sample_rate The sampling frequency in Hz.
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          */
-        constexpr triangular_oscillator(value_type amplitude, value_type samplerate, value_type frequency) noexcept;
+        constexpr triangular_oscillator(value_type amplitude, value_type sample_rate, value_type frequency) noexcept;
     };
 
     template <typename T>
-    constexpr triangular_oscillator<T>::triangular_oscillator(value_type amplitude, value_type samplerate,
+    constexpr triangular_oscillator<T>::triangular_oscillator(value_type amplitude, value_type sample_rate,
                                                               value_type frequency) noexcept :
-        sawtooth_oscillator<T>(amplitude, samplerate, frequency, 0.5) {}
+        sawtooth_oscillator<T>(amplitude, sample_rate, frequency, 0.5) {}
 
 }} // namespace edsp::oscillators
 

@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: library_info.hpp
@@ -33,7 +33,7 @@ namespace edsp { inline namespace core {
 
     enum class codec_lib { audiofile, sndfile, unknown };
 
-    enum class resample_lib { samplerate, resample, unknown };
+    enum class resample_lib { sample_rate, resample, unknown };
 
     inline logger& operator<<(logger& stream, fft_lib lib) {
         switch (lib) {
@@ -43,6 +43,7 @@ namespace edsp { inline namespace core {
                 return stream << "PFFFT";
             case fft_lib::accelerate:
                 return stream << "Apple Accelerate Framework";
+            case fft_lib::unknown:
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
@@ -54,6 +55,7 @@ namespace edsp { inline namespace core {
                 return stream << "Audio File Library";
             case codec_lib::sndfile:
                 return stream << "Lib SndFile";
+            case codec_lib::unknown:
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
@@ -61,10 +63,11 @@ namespace edsp { inline namespace core {
 
     inline logger& operator<<(logger& stream, resample_lib lib) {
         switch (lib) {
-            case resample_lib::samplerate:
-                return stream << "libsamplerate";
+            case resample_lib::sample_rate:
+                return stream << "libsample_rate";
             case resample_lib::resample:
                 return stream << "libresample";
+            case resample_lib::unknown:
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
@@ -80,7 +83,7 @@ namespace edsp { inline namespace core {
         }
 
         static constexpr std::int32_t patch_version() noexcept {
-            return E_VERSION_MINOR;
+            return E_VERSION_PATCH;
         }
 
         static constexpr const char* version() noexcept {
@@ -119,7 +122,7 @@ namespace edsp { inline namespace core {
 
         static constexpr resample_lib resample_library() noexcept {
 #if defined(USE_LIBSAMPLERATE)
-            return resample_lib::samplerate;
+            return resample_lib::sample_rate;
 #elif defined(USE_LIBRESAMPLE)
             return resample_lib::resample;
 #else

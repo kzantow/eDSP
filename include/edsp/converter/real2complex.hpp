@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: real2complex.hpp
@@ -29,17 +29,6 @@
 namespace edsp { inline namespace converter {
 
     /**
-     * @brief Converts a real scalar to an equivalent complex number.
-     * @param real Scalar number representing the real part of the complex number.
-     * @param imag Scalar number representing the imaginary part of the complex number.
-     * @returns Returns the complex-valued.
-     */
-    template <typename T>
-    constexpr std::complex<T> real2complex(T real, T imag = static_cast<T>(0)) noexcept {
-        return std::complex<T>(real, imag);
-    }
-
-    /**
      * @brief Converts a range of scalar numbers in to an equivalent complex number
      * and stores the result in another range.
      *
@@ -50,9 +39,8 @@ namespace edsp { inline namespace converter {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first, InputIt last, OutputIt d_first) {
-        using input_t  = meta::value_type_t<InputIt>;
         using output_t = meta::value_type_t<OutputIt>;
-        std::transform(first, last, d_first, [](const input_t value) -> output_t { return value; });
+        std::transform(first, last, d_first, [](const auto real) -> output_t { return {real, 0}; });
     }
 
     /**
@@ -66,9 +54,8 @@ namespace edsp { inline namespace converter {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {
-        using input_t  = meta::value_type_t<InputIt>;
         using output_t = meta::value_type_t<OutputIt>;
-        std::transform(first1, last1, first2, d_first, [](const input_t real, const input_t imag) -> output_t {
+        std::transform(first1, last1, first2, d_first, [](const auto real, const auto imag) -> output_t {
             return {real, imag};
         });
     }

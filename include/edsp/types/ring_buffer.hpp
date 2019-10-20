@@ -45,6 +45,7 @@ namespace edsp { inline namespace types {
      * @tparam T  Type of element.
      * @tparam Allocator  Allocator type, defaults to std::allocator<T>.
      */
+    // TODO: Check why the default copy constructor is disabled!
     template <typename T, typename Allocator = std::allocator<T>>
     class ring_buffer {
     public:
@@ -403,7 +404,6 @@ namespace edsp { inline namespace types {
         /**
         *  @brief Inserts an object at the end of the %ring_buffer.
         *  @param arg  Arguments.
-        *  @return  An iterator that points to the inserted data.
         *
         *  This function will insert an object of type T constructed
         *  with T(std::forward<Args>(args)...) before the specified location.

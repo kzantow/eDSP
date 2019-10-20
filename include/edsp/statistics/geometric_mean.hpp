@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: geometric_mean.hpp
@@ -41,13 +41,13 @@ namespace edsp { namespace statistics {
      * @returns The geometric mean of the input range.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> geometric_mean(ForwardIt first, ForwardIt last) {
-        using input_t  = meta::value_type_t<ForwardIt>;
-        const auto acc = std::accumulate(first, last, static_cast<input_t>(1), std::multiplies<input_t>());
-        const auto sz  = static_cast<input_t>(std::distance(first, last));
-        return std::pow(acc, math::inv(sz));
+    constexpr auto geometric_mean(ForwardIt first, ForwardIt last) {
+        using value_type     = meta::value_type_t<ForwardIt>;
+        const auto predicate = [](const auto prev, const auto current) { return prev + std::log(current); };
+        const auto acc       = std::accumulate(first, last, static_cast<value_type>(0), predicate);
+        const auto sz        = static_cast<value_type>(std::distance(first, last));
+        return std::exp(acc / sz);
     }
-
 }} // namespace edsp::statistics
 
 #endif // EDSP_STATISTICAL_GEOMETRIC_MEAN_H

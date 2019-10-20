@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: abstract_designer.hpp
@@ -22,7 +22,6 @@
 #ifndef EDSP_POLEFILTER_HPP
 #define EDSP_POLEFILTER_HPP
 
-#include <edsp/meta/declfriend.hpp>
 #include <edsp/filter/internal/bilinear/layout_base.hpp>
 #include <edsp/filter/biquad_cascade.hpp>
 #include <complex>
@@ -32,7 +31,7 @@ namespace edsp { namespace filter {
     namespace {
         template <typename T>
         biquad<T> make_biquad(const pz_pair<T>& pair) noexcept {
-            if (pair.isSinglePole()) {
+            if (pair.single_pole()) {
                 return biquad<T>(pair.poles().first, pair.zeros().first);
             } else {
                 return biquad<T>(pair.poles().first, pair.zeros().first, pair.poles().second, pair.zeros().second);
@@ -54,7 +53,7 @@ namespace edsp { namespace filter {
             auto ch         = std::complex<T>(1, 0);
             auto cbot       = std::complex<T>(1, 0);
 
-            for (std::int32_t i = cascade.size(), index = 0; --i >= 0; ++index) {
+            for (std::int32_t i = static_cast<int32_t>(cascade.size()), index = 0; --i >= 0; ++index) {
                 const auto& stage = cascade[index];
                 auto cb           = std::complex<T>(1, 0);
                 auto ct           = std::complex<T>(stage.b0() / stage.a0(), 0);
@@ -71,14 +70,14 @@ namespace edsp { namespace filter {
         template <typename T, std::size_t N>
         constexpr biquad_cascade<T, (N + 1) / 2> make_cascade(const LayoutBase<T, N>& digital) noexcept {
             biquad_cascade<T, (N + 1) / 2> cascade;
-            const auto num_poles   = digital.numberPoles();
+            const auto num_poles   = digital.poles();
             const auto num_biquads = (num_poles + 1) / 2;
             for (auto i = 0ul; i < num_biquads; ++i) {
                 cascade.emplace_back(std::move(make_biquad(digital[i])));
             }
 
-            const auto response = make_response(cascade, digital.normalW() / constants<T>::two_pi);
-            const auto scale    = digital.normalGain() / std::abs(response);
+            const auto response = make_response(cascade, digital.w() / constants<T>::two_pi);
+            const auto scale    = digital.gain() / std::abs(response);
             apply_scale(cascade[0], scale);
             return cascade;
         }

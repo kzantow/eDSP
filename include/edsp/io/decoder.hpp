@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: decoder.hpp
@@ -24,7 +24,7 @@
 #define EDSP_DECODER_HPP
 
 #include <edsp/types/string_view.hpp>
-#include <edsp/io/internal/codec/decoder_impl.hpp>
+#include <edsp/io/internal/decoder/decoder_impl.hpp>
 
 namespace edsp { namespace io {
 
@@ -49,7 +49,7 @@ namespace edsp { namespace io {
          * @param file_path Path to the file to be opened.
          * @return true if the file has been opened, false otherwise.
          */
-        bool open(const edsp::string_view& file_path) {
+        bool open(const std::string& file_path) {
             return impl_.open(file_path);
         }
 
@@ -77,7 +77,7 @@ namespace edsp { namespace io {
             return impl_.samples();
         }
 
-        /*
+        /**
          * @brief Returns the number of frames in the audio file.
          *
          * Each sample frame of audio consists of a fixed number of samples (equal to the number of audio channels in
@@ -102,19 +102,11 @@ namespace edsp { namespace io {
         }
 
         /**
-         * @brief Returns the duration of the audio file in seconds.
-         * @return Duration of the audio file in seconds.
-         */
-        double duration() const noexcept {
-            return impl_.duration();
-        }
-
-        /**
          * @brief Returns the sampling rate of the audio file in Hz.
          * @return Sampling rate of the audio file in Hz.
          */
-        double samplerate() const noexcept {
-            return impl_.samplerate();
+        double sample_rate() const noexcept {
+            return impl_.sample_rate();
         }
 
         /**

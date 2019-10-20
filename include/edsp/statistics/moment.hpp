@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: moment.hpp
@@ -31,6 +31,7 @@ namespace edsp { namespace statistics {
     namespace internal {
 
         // TODO: update this internal
+        // From: https://gist.github.com/ofZach/4014022
         template <int N, class T>
         constexpr T nthPower(T x) {
             T ret = x;

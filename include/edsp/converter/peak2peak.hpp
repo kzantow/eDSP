@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: peak2peak.hpp
@@ -22,7 +22,6 @@
 #ifndef EDSP_PEAK2PEAK_HPP
 #define EDSP_PEAK2PEAK_HPP
 
-#include <edsp/meta/iterator.hpp>
 #include <algorithm>
 #include <cmath>
 
@@ -35,9 +34,9 @@ namespace edsp { inline namespace converter {
      * @returns Maximum-to-minimum difference.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> peak2peak(ForwardIt first, ForwardIt last) {
+    constexpr auto peak2peak(ForwardIt first, ForwardIt last) {
         const auto pair = std::minmax_element(first, last);
-        return std::abs(pair.second) - std::abs(pair.first);
+        return std::abs(*pair.second) - std::abs(*pair.first);
     }
 
 }} // namespace edsp::converter

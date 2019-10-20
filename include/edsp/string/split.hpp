@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: split.hpp
@@ -39,8 +39,10 @@ namespace edsp { namespace string {
         std::stringstream test(str);
         std::basic_string<Char> segment;
         while (std::getline(test, segment, character)) {
-            *d_first = segment;
-            ++d_first;
+            if (!segment.empty()) {
+                *d_first = segment;
+                ++d_first;
+            }
         }
     }
 

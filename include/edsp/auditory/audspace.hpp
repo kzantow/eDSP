@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: audspace.hpp
@@ -55,7 +55,7 @@ namespace edsp { namespace auditory {
     constexpr void audspace(OutputIt d_first, Numeric min, Numeric max, Integer N, auditory_scale scale) {
         switch (scale) {
             case auditory_scale::mel:
-                melspace<mel_base::base_10>(d_first, min, max, N);
+                melspace(d_first, min, max, N);
                 break;
             case auditory_scale::erb:
                 erbspace(d_first, min, max, N);

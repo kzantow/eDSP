@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: expects.hpp
@@ -40,7 +40,7 @@ namespace edsp { namespace meta {
         if (!condition) {
             eCritical() << msg;
         }
-        assert(condition && data(msg));
+        assert(condition && msg.data());
     }
 
 }} // namespace edsp::meta

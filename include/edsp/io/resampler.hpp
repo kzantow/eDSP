@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: resampler_impl.hpp
@@ -55,7 +55,7 @@ namespace edsp { namespace io {
          * @brief Creates a resampler with the given configuration
          * @param channels Number of channels.
          * @param quality  Quality of the resampling process.
-         * @param factor   Resampling factor (output samplerate / input samplerate)
+         * @param factor   Resampling factor (output sample_rate / input sample_rate)
          */
         resampler(size_type channels, resample_quality quality, value_type factor) : impl(channels, quality, factor) {}
 
@@ -85,7 +85,7 @@ namespace edsp { namespace io {
          * @return Number of samples computed in the output range.
          */
         template <typename InputIt, typename OutputIt>
-        inline size_type process(InputIt first, InputIt last, OutputIt d_first) {
+        std::pair<size_type, size_type> process(InputIt first, InputIt last, OutputIt d_first) {
             return impl.process(first, last, d_first);
         }
 
@@ -122,16 +122,30 @@ namespace edsp { namespace io {
         }
 
         /**
+         * @brief Returns the resampling factor or ratio.
+         */
+        value_type ratio() const {
+            return impl.ratio();
+        }
+
+        /**
+         * @brief Returns the number of channels
+         */
+        size_type channels() const {
+            return impl.channels();
+        }
+
+        /**
          * @brief Checks if a ratio is valid
          * @param ratio Ratio to be tested
          * @return true if the ratio is valid, false otherwise.
          */
         static bool valid_ratio(value_type ratio) {
-            return internal::resampler_impl<T>::valid_ratio(ratio);
+            return resampler_impl<T>::valid_ratio(ratio);
         }
 
     private:
-        internal::resampler_impl<T> impl;
+        resampler_impl<T> impl;
     };
 
 }} // namespace edsp::io

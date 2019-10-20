@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: cent2hertz.hpp
@@ -37,8 +37,8 @@ namespace edsp { namespace auditory { inline namespace converter {
      */
     template <typename T>
     constexpr T hertz2cent(T z) noexcept {
-        constexpr T p = 1200 / std::log(2);
-        constexpr T q = 5700 - p * std::log(440);
+        const T p = 1200 / std::log(2);
+        const T q = 5700 - p * std::log(440);
         return math::sign(z) * (p * std::log(std::abs(z)) + q);
     }
 

@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: lowpass_transformer.hpp
@@ -31,15 +31,15 @@ namespace edsp { namespace filter {
     struct LowPassTransformer {
         using value_type = T;
 
-        LowPassTransformer(value_type fc) : f(std::tan(constants<value_type>::pi * fc)) {}
+        explicit LowPassTransformer(value_type fc) : f(std::tan(constants<value_type>::pi * fc)) {}
 
         template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
         void operator()(const LayoutBase<T, AnalogMaxSize>& analog, LayoutBase<T, DigitalMaxSize>& digital) {
             digital.reset();
-            digital.setNormalW(analog.normalW());
-            digital.setNormalGain(analog.normalGain());
+            digital.set_w(analog.w());
+            digital.set_gain(analog.gain());
 
-            const auto num_poles = analog.numberPoles();
+            const auto num_poles = analog.poles();
             const auto num_pairs = num_poles / 2;
             for (auto i = 0ul; i < num_pairs; ++i) {
                 const auto& pair = analog[i];

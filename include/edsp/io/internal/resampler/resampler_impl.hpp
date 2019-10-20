@@ -12,7 +12,7 @@
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 * more details.
 *
-* You should have received a copy of the GNU General Public License along withº
+* You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
 * Filename: resampler_impl.hpp
@@ -24,23 +24,23 @@
 #define EDSP_RESAMPLER_IMPL_HPP
 
 #if defined(USE_LIBSAMPLERATE)
-#    include <edsp/io/internal/resampler/libsamplerate_implementation.hpp>
+#    include <edsp/io/internal/resampler/libsamplerate_impl.hpp>
 #elif defined(USE_LIBRESAMPLE)
 #    include <edsp/io/internal/resampler/libresample_resampler.hpp>
 #endif
 
-namespace edsp { namespace io { inline namespace internal {
+namespace edsp { namespace io {
 
 #if defined(USE_LIBSAMPLERATE)
     template <typename T>
-    using resampler_impl = libsamplerate_resampler<T>;
+    using resampler_impl = libsamplerate_impl<T>;
 #elif defined(USE_LIBRESAMPLE)
     template <typename T>
-    using resampler_impl = libresample_resampler<T>;
+    using resampler_impl = libresample_impl<T>;
 #else
 #    error "Compatible library not found!"
 #endif
 
-}}} // namespace edsp::io::internal
+}} // namespace edsp::io
 
 #endif //EDSP_RESAMPLER_IMPL_HPP

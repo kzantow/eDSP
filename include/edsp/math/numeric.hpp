@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
 
  * File: numeric.hpp
@@ -84,7 +84,7 @@ namespace edsp { inline namespace math {
     /**
      * @brief Determines if the number is normal floating-point.
      * @param x Number to evaluate.
-     * @returns true if the number is even, false otherwise
+     * @returns true if the number is normal, false otherwise
      */
     template <typename T>
     constexpr bool is_normal(T x) {

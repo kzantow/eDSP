@@ -10,6 +10,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/mohabouje/eDSP.svg)
 [![Build Status][travis-badge]][travis-link]
 [![codecov][codecov-badge]][codecov-link]
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bbea9e1e8efd4610b71071b275948d83)](https://www.codacy.com/app/mohabouje/eDSP?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mohabouje/eDSP&amp;utm_campaign=Badge_Grade)
 
 ![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)
 ![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)
@@ -32,7 +33,8 @@ Got it! Excellent question! There are plenty of established DSP frameworks for C
 - Provides **fast** implementations: check the available [benchmarks](https://github.com/mohabouje/eDSP/wiki/Benchmark).
 - Aims to be **cross-platform**
 - Supports modern **C++11/14/17 features**
-- Integrates bindings for different languages: **Python and JavaScript**
+- Implements a simple interface compatible with C
+- Integrates bind for different languages: **Python, Go and JavaScript**
 
 ### What platforms are supported?
 
@@ -66,7 +68,7 @@ eDSP is organized in different modules. Each module integrates different related
 
 **Note:** *eDSP is a framework under construction. Some features are scheduled for future development.*
 
-Please check the official [docs](https://mohabouje.github.io/eDSP/) or the list of [available features](https://github.com/mohabouje/eDSP/wiki/Modules) to find a detailed information of each module.
+Please check the official [docs](https://mohabouje.github.io/edsp-docs/) or the list of [available features](https://github.com/mohabouje/eDSP/wiki/Modules) to find a detailed information of each module.
 
 ### Quick start
 
@@ -107,3 +109,25 @@ Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html)
 [travis-link]: https://travis-ci.org/mohabouje/eDSP
 [codecov-badge]: https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/mohabouje/eDSP
+
+### Donation
+
+This project is developed by [Mohammed Boujemaoui](mailto:mohabouje@gmail.com) on his free time to provide a
+fully integrated DSP framework for signal processing, speech processing or music information retrieval.
+
+If you feel this project is useful to you and want to support it and it's
+future development please consider donating money. 
+
+
+
+
+| [![Paypal](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QMXHMYW9BY5C4&source=url) | [![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/join/mohabouje) |
+
+
+
+
+
+
+
+
+

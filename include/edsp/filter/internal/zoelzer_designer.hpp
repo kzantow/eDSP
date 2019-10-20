@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: zoelzer_designer.hpp
@@ -77,7 +77,6 @@ namespace edsp { namespace filter {
             return biquad<T>(1, a1, a2, b0, b1, b2);
         }
     };
-
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, filter_type::LowShelf> {

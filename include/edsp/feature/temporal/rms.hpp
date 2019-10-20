@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: rms.hpp
@@ -22,7 +22,6 @@
 #ifndef EDSP_STATISTICAL_RMS_H
 #define EDSP_STATISTICAL_RMS_H
 
-#include <edsp/meta/iterator.hpp>
 #include <numeric>
 #include <cmath>
 
@@ -41,10 +40,10 @@ namespace edsp { namespace feature { inline namespace temporal {
      * @returns The root mean square value of the input range.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> rms(ForwardIt first, ForwardIt last) {
-        using input_t          = meta::value_type_t<ForwardIt>;
-        const auto accumulated = std::inner_product(first, last, first, static_cast<input_t>(1));
-        return std::sqrt(accumulated / static_cast<input_t>(std::distance(first, last)));
+    constexpr auto rms(ForwardIt first, ForwardIt last) {
+        using value_type       = typename std::iterator_traits<ForwardIt>::value_type;
+        const auto accumulated = std::inner_product(first, last, first, static_cast<value_type>(1));
+        return std::sqrt(accumulated / static_cast<value_type>(std::distance(first, last)));
     }
 }}} // namespace edsp::feature::temporal
 

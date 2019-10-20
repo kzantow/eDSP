@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
 
  * File: converter.hpp
@@ -32,5 +32,6 @@
 #include <edsp/converter/pow2db.hpp>
 #include <edsp/converter/rad2deg.hpp>
 #include <edsp/converter/real2complex.hpp>
+#include <edsp/converter/complex2real.hpp>
 
 #endif //EDSP_CONVERTER_HPP

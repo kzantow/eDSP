@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: chebyshev_ii.hpp
@@ -39,16 +39,16 @@ namespace edsp { namespace filter {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T stopband_db) const {
                 meta::expects(num_poles <= MaxSize, "Index out of bounds");
-                analog.setNormalW(0);
-                analog.setNormalGain(1);
+                analog.set_w(0);
+                analog.set_gain(1);
                 analog.reset();
 
-                const auto eps     = std::sqrt(math::inv(std::exp(stopband_db * 0.1 * constants<T>::ln_ten) - 1));
+                const auto eps     = std::sqrt(math::inv(std::expm1(stopband_db * 0.1 * constants<T>::ln_ten)));
                 const auto v0      = std::asinh(math::inv(eps)) / static_cast<T>(num_poles);
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);
                 const auto fn      = constants<T>::pi / static_cast<T>(2 * num_poles);
-                for (std::int32_t k = 1, i = num_poles / 2; --i >= 0; k += 2) {
+                for (std::int64_t k = 1, i = static_cast<std::int64_t>(num_poles / 2); --i >= 0; k += 2) {
                     const auto a  = sinh_v0 * std::cos((k - static_cast<std::int32_t>(num_poles)) * fn);
                     const auto b  = cosh_v0 * std::sin((k - static_cast<std::int32_t>(num_poles)) * fn);
                     const auto d2 = math::square(a) + math::square(b);
@@ -67,8 +67,8 @@ namespace edsp { namespace filter {
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T gain_db, T stopband_db) const {
                 meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
-                analog.setNormalW(constants<T>::pi);
-                analog.setNormalGain(1);
+                analog.set_w(constants<T>::pi);
+                analog.set_gain(1);
                 analog.reset();
 
                 gain_db = -gain_db;
@@ -182,8 +182,8 @@ namespace edsp { namespace filter {
                 BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
 
                 // HACK!
-                this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
-                this->digital_.setNormalGain(1);
+                this->digital_.set_w(normalized_center < 0.25 ? constants<T>::pi : 0);
+                this->digital_.set_gain(1);
             }
         };
 
